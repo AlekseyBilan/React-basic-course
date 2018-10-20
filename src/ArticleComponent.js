@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentsList from './CommentsList'
 
 export default class ArticleComponent extends Component {
     constructor(props) {
@@ -27,7 +28,12 @@ export default class ArticleComponent extends Component {
     getHtml(){
         const {article} = this.props;
         if(this.state.isOpen){
-            return <div>{article.text}</div>
+            return (
+                <div>
+                    {article.text}
+                    <CommentsList comments = {article.comments}/>
+                </div>
+            )
         }else{
             return null;
         }
