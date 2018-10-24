@@ -10,5 +10,8 @@ function ArticleList (props){
          <ul>{articleElements}</ul>
     )
 }
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired
+};
 
 export default ArticleList
