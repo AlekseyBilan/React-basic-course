@@ -12,7 +12,6 @@ function Comment(props){
         </section>
     )
 }
-
 function getCommentLayout (comment, isOpen){
     if (isOpen){
         return (<section><h4>{comment.user}</h4><p>{comment.text}</p></section>)
@@ -20,4 +19,5 @@ function getCommentLayout (comment, isOpen){
         return null;
     }
 }
+
 export default toggleOpen(Comment)
