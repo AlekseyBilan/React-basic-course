@@ -4,7 +4,7 @@ export default OriginalComponent => class accordion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            openItemId: null
+            openItemId: props.defaultOpenId
         }
     }
 

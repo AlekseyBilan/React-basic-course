@@ -9,7 +9,8 @@ class App extends Component {
         selection: null
     };
     render(){
-        const options = this.props.articles.map( article => ({
+        const {articles} = this.props;
+        const options = articles.map( article => ({
             label: article.title,
             value: article.id
         }));
@@ -18,7 +19,7 @@ class App extends Component {
             <div>
                 <UserForm/>
                 <Select className = 'myClass' options = {options} value = {this.state.selection} onChange = {this.changeSelection} multi = {true}/>
-                <ArticleList articles = {this.props.articles} />
+                <ArticleList articles = {articles} defaultOpenId = {articles[0].id}/>
             </div>
         )
     }
