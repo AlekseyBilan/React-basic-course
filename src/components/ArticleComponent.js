@@ -1,41 +1,49 @@
-import React from 'react'
+import React, {Component} from 'react'
 import CommentsList from './CommentsList'
 import PropTypes from 'prop-types'
 
-ArticleComponent.propTypes = {
-    article: PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired
-    }).isRequired,
-    isOpen: PropTypes.bool,
-    toggleOpen: PropTypes.func
-};
+class ArticleComponent extends Component {
+    static propTypes = {
+        article: PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired
+        }).isRequired,
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func
+    };
 
-function ArticleComponent(props) {
-    const {article, isOpen, toggleOpen} = props;
-    return(
-        <div>
-            <h3>{article.title}</h3>
-            {getHtml(article, isOpen)}
-            <button onClick={toggleOpen}>
-                {(isOpen)? 'Close article' : 'Open article'}
-            </button>
-        </div>
-    )
-}
+    shouldComponentUpdate(nextProps, nextState){
+        return nextProps.isOpen !== this.props.isOpen;
+    }
 
-function  getHtml(article, isOpen){
-    if(isOpen){
+    render(){
+        const {article, isOpen, toggleOpen} = this.props;
+        console.log('ArticleComponent render isOpen ', isOpen, article.id);
         return (
             <div>
-                {article.text}
-                <CommentsList comments = {article.comments}/>
+                <h3>{article.title}</h3>
+                {this.getHtml()}
+                <button onClick={toggleOpen}>
+                    {(isOpen) ? 'Close article' : 'Open article'}
+                </button>
             </div>
         )
-    }else{
-        return null;
+    }
+
+    getHtml() {
+        const {article, isOpen} = this.props;
+        if (isOpen) {
+            return (
+                <div>
+                    {article.text}
+                    <CommentsList comments={article.comments}/>
+                </div>
+            )
+        } else {
+            return null;
+        }
     }
 }
 
-export default ArticleComponent
+export default ArticleComponent;

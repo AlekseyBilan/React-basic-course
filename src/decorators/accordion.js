@@ -14,7 +14,7 @@ export default OriginalComponent => class accordion extends Component {
 
     toggleOpenItem = openItemId => ev => {
         this.setState({
-            openArticleId: openItemId === this.state.openItemId ? null : openItemId
+            openItemId: openItemId === this.state.openItemId ? null : openItemId
         });
     }
 }
