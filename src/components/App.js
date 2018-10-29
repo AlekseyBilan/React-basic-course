@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ArticleList from './ArticleList'
 import UserForm from './UserForm'
+import DateRange from './DatePicker'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
@@ -18,6 +19,7 @@ class App extends Component {
         return (
             <div>
                 <UserForm/>
+                <DateRange/>
                 <Select className = 'myClass' options = {options} value = {this.state.selection} onChange = {this.changeSelection} multi = {true}/>
                 <ArticleList articles = {articles} defaultOpenId = {articles[0].id}/>
             </div>

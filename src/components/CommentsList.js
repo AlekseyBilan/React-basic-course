@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Comment from "./Comment";
+import NewCommentForm from "./NewCommentForm";
 
 export default class CommentsList extends Component{
     static defaultProps = {
@@ -7,11 +8,12 @@ export default class CommentsList extends Component{
     };
     render (){
         const {comments} = this.props;
+            const newCommentForm = <NewCommentForm/>;
             if(comments.length){
                 const commentElements = comments.map(comment => <li key={comment.id}><Comment comment = {comment}/></li>);
-                return  <ul>{commentElements}</ul>
+                return  <div><ul>{commentElements}</ul><NewCommentForm/></div>
             } else {
-                return  <p>There are no comments here.</p>
+                return  <div><p>There are no comments here.</p>You can create a new one <NewCommentForm/></div>
             }
     }
 }
