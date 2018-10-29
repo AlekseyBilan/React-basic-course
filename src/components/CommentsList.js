@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Comment from "./Comment";
-import NewCommentForm from "./NewCommentForm";
+import NewCommentForm from "./ComponentForm/NewCommentForm";
 
 export default class CommentsList extends Component{
     static defaultProps = {

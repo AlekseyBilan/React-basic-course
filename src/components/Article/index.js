@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import CommentsList from './CommentsList'
+import CommentsList from '../CommentsList'
 import PropTypes from 'prop-types'
 import {CSSTransitionGroup} from 'react-transition-group'
 import './article.css'
 
-class ArticleComponent extends Component {
+class Article extends Component {
     static propTypes = {
         article: PropTypes.shape({
             id: PropTypes.string.isRequired,
@@ -57,4 +57,4 @@ class ArticleComponent extends Component {
     }
 }
 
-export default ArticleComponent;
+export default Article;
