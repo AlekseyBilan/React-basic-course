@@ -3,6 +3,8 @@ import CommentsList from '../CommentsList'
 import PropTypes from 'prop-types'
 import {CSSTransitionGroup} from 'react-transition-group'
 import './article.css'
+import {connect} from 'react-redux';
+import {removeArticle} from "../../AC";
 
 class Article extends Component {
     static propTypes = {
@@ -21,7 +23,6 @@ class Article extends Component {
 
     render(){
         const {article, isOpen, toggleOpen} = this.props;
-        console.log('ArticleComponent render isOpen ', isOpen, article.id);
         return (
             <div>
                 <h3>{article.title}</h3>
@@ -37,6 +38,9 @@ class Article extends Component {
                 </CSSTransitionGroup>
                 <button onClick={toggleOpen}>
                     {(isOpen) ? 'Close article' : 'Open article'}
+                </button>
+                <button onClick={this.handleRemoveArticle}>
+                    Remove
                 </button>
             </div>
         )
@@ -55,6 +59,11 @@ class Article extends Component {
             return null;
         }
     }
+
+    handleRemoveArticle = () => {
+        const {removeArticle, article} = this.props;
+        removeArticle(article.id);
+    }
 }
 
-export default Article;
+export default connect(null, {removeArticle: removeArticle})(Article);
