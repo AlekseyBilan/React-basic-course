@@ -1,38 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
+import toggleOpen from '../decorators/toggleOpen'
 
-export default class Comment extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isOpenComment: false
-        };
-
-        this.toggleOpen = this.toggleOpen.bind(this);
-    }
-
-    render(){
-        return (
-            <div className='comments-wrapper'>
-                <ul>{this.getCommentsHtml()}</ul>
-                <button onClick={this.toggleOpen}>{(this.state.isOpenComment)? 'Close comments' : 'Open comments'}</button>
-            </div>
-            )
-    }
-
-    getCommentsHtml() {
-        const {comment} = this.props;
-        if(this.state.isOpenComment){
-            return <li key={comment.id}><b>{comment.user}</b><p>{comment.text}</p></li>;
-        }else{
-            return null;
-        }
-    }
-
-    toggleOpen(){
-        this.setState({
-            isOpenComment: !this.state.isOpenComment
-        });
-    }
-
+function Comment({comment, isOpen, toggleOpen}){
+    return (
+        <div className='comments-wrapper'>
+            <ul>
+                {(isOpen) ? (<li key={comment.id}><b>{comment.user}</b><p>{comment.text}</p></li>) : null}
+            </ul>
+            <button onClick={toggleOpen}>{(isOpen)? 'Close comments' : 'Open comments'}</button>
+        </div>
+    )
 }
+
+export default toggleOpen(Comment);

@@ -1,48 +1,39 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import CommentsList from './CommentsList';
+import toggleOpen from '../decorators/toggleOpen'
 
-class Article extends Component {
-    static propTypes = {
-        article : PropTypes.shape({
-                id : PropTypes.string.isRequired,
-                title : PropTypes.string.isRequired,
-                text : PropTypes.string,
-                comments : PropTypes.array
-        }).isRequired
-    };
-
-    render(){
-        const {article, isOpen, toggleOpen} = this.props;
-
-        return (
-            <div ref = {this.setContainerRef}>
-                <h3>{article.title}</h3>
-                {this.getArticleText()}
-                <button onClick={toggleOpen}>
-                    {(isOpen)? 'Close article' : 'Open article'}
-                </button>
-            </div>
-        )
-    }
-
-    setContainerRef = ref => {
-        this.container = ref
-        //console.log('Ref', ref);
-    };
-
-    getArticleText() {
-        const {article, isOpen, toggleOpen} = this.props;
+function Article({article, isOpen, toggleOpen}){
+    const getArticleText = function () {
         if(isOpen){
             return <div>
-                        {article.text}
-                        <CommentsList comments = {article.comments} />
-                   </div>
+                {article.text}
+                <CommentsList comments = {article.comments} />
+            </div>
         }else{
             return null;
         }
-    }
-
+    };
+    return (
+        <div>
+            <h3>{article.title}</h3>
+            {getArticleText()}
+            <button onClick={toggleOpen}>
+                {(isOpen)? 'Close article' : 'Open article'}
+            </button>
+        </div>
+    )
 }
 
-export default Article;
+Article.propTypes = {
+    article : PropTypes.shape({
+        id : PropTypes.string.isRequired,
+        title : PropTypes.string.isRequired,
+        text : PropTypes.string,
+        comments : PropTypes.array
+    }).isRequired,
+    isOpen : PropTypes.bool,
+    toggleOpen : PropTypes.func
+};
+
+export default toggleOpen(Article);
