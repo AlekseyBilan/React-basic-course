@@ -1,4 +1,4 @@
-var path = require('path');
+let path = require('path');
 
 module.exports = {
     devtool: 'source-map',
@@ -26,8 +26,8 @@ module.exports = {
             },
             {
                 test: /\.css/,
-                loaders: ['style-loader', 'css-loader'],
+                loaders: ['style-loader', 'css-loader']
             }
         ]
     }
-}
+};
